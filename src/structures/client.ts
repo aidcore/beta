@@ -95,5 +95,25 @@ export default class Client {
                 JSON.stringify(allContents, null, 2)
             )
         }
+
+        if (stmt.startsWith('SELECT all')){
+            var dbname: any = stmt?.split('[')?.pop()?.split(']')[0]
+            var tablename: any = stmt?.split('<')?.pop()?.split('>')[0]
+            var tablefilter: any = stmt?.split('(')?.pop()?.split(')')[0]
+
+            if (!fs.existsSync(this.defaultDirname + '/' + dbname + '/' + tablename + '.json')){
+                return false
+            }
+
+            var searchCondition = JSON.parse(fs.readFileSync(this.defaultDirname + '/' + dbname + '/' + tablename + '.json', 'utf8'))
+            var search = searchCondition.filter((x: any) => x === JSON.parse(tablefilter))
+
+            if (search === []){
+                return false
+            }
+
+            return search
+        }
+
     }
 }
