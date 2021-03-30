@@ -78,19 +78,21 @@ export default class Client {
                 fs.mkdirSync(this.defaultDirname + '/' + dbname)
             }
 
-            var allContents
+            var allContents: any
 
             if (fs.existsSync(this.defaultDirname + '/' + dbname + '/' + tablename + '.json')){
-                allContents = JSON.parse(fs.readFileSync(this.defaultDirname + '/' + dbname + '/' + tablename + '.json', 'utf-8'))
+                allContents = JSON.parse(fs.readFileSync(this.defaultDirname + '/' + dbname + '/' + tablename + '.json', 'utf8'))
             } else {
                 allContents = []
             }
 
-            allContents.push(tablecontents)
+            allContents.push(JSON.parse((tablecontents)))
+            console.log(allContents)
+            console.log(tablecontents)
 
             fs.writeFileSync(
                 this.defaultDirname + '/' + dbname + '/' + tablename + '.json',
-                allContents
+                JSON.stringify(allContents, null, 2)
             )
         }
     }
