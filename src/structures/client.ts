@@ -48,13 +48,36 @@ export default class Client {
         if (stmt.startsWith('CREATE TABLE')){
             var dbname: any = stmt?.split('[')?.pop()?.split(']')[0]
             var tablename: any = stmt?.split('<')?.pop()?.split(']')[0]
-            var tablesettings: any = stmt?.split('(')?.pop()?.split(')')[0]
+            var tablecontents: any = stmt?.split('(')?.pop()?.split(')')[0]
             
             this.expressServer.use(express.static('src/public'))
             this.expressServer.set('views', 'src/views')
             this.expressServer.set('view engine', 'ejs')
 
-            
+            if (!fs.existsSync(this.defaultDirname)){
+                fs.mkdirSync(this.defaultDirname)
+            }
+
+            if (!fs.existsSync(this.defaultDirname + '/' + dbname)){
+                fs.mkdirSync(this.defaultDirname + '/' + dbname)
+            }
+
+            fs.writeFileSync(this.defaultDirname + '/' + dbname + '/' + tablename + '.json', JSON.stringify([]))
+
+            var allContents
+
+            if (fs.existsSync(this.defaultDirname + '/' + dbname + '/' + tablename + '.json')){
+                allContents = JSON.parse(fs.readFileSync(this.defaultDirname + '/' + dbname + '/' + tablename + '.json', 'utf-8'))
+            } else {
+                allContents = []
+            }
+
+            allContents.push(tablecontents)
+
+            fs.writeFileSync(
+                this.defaultDirname + '/' + dbname + '/' + tablename + '.json',
+                allContents
+            )
         }
     }
 }
