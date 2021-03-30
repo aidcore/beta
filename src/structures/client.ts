@@ -47,7 +47,7 @@ export default class Client {
 
         if (stmt.startsWith('CREATE TABLE')){
             var dbname: any = stmt?.split('[')?.pop()?.split(']')[0]
-            var tablename: any = stmt?.split('<')?.pop()?.split(']')[0]
+            var tablename: any = stmt?.split('<')?.pop()?.split('>')[0]
             var tablecontents: any = stmt?.split('(')?.pop()?.split(')')[0]
             
             this.expressServer.use(express.static('src/public'))
@@ -67,7 +67,7 @@ export default class Client {
 
         if (stmt.startsWith('INSERT ROW')){
             var dbname: any = stmt?.split('[')?.pop()?.split(']')[0]
-            var tablename: any = stmt?.split('<')?.pop()?.split(']')[0]
+            var tablename: any = stmt?.split('<')?.pop()?.split('>')[0]
             var tablecontents: any = stmt?.split('(')?.pop()?.split(')')[0]
 
             if (!fs.existsSync(this.defaultDirname)){
