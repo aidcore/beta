@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap');
+
+h3 {
+    font-family: 'Roboto';
+    font-weight: 900;
+}
+
+.navbar {
+    width: 100%;
+    background-color: #528BBA;
+    overflow: auto;
+}
+  
+.navbar a {
+    float: left;
+    text-align: center;
+    padding: 12px;
+    color: white;
+    text-decoration: none;
+    font-size: 17px;
+    font-family: 'Roboto';
+}
+  
+.navbar a:hover {
+    background-color: #447197;
+}
+  
+.active {
+    background-color: #528BBA;
+}
+
+th {
+    font-family: 'Roboto';
+    font-weight: 700;
+}
+
+td {
+    font-family: 'Roboto';
+    font-weight: 400;
+}

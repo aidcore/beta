@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <title>Aidcore Workbench</title>
+        <link rel="stylesheet" href="/css/style.css">
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.14.0/css/all.css">
+        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+
+    </head>
+
+    <body>
+        <img src="https://file.coffee/u/rmx683tqfI.png" width="450">
+
+        <div class="navbar">
+            <a class="active" href="/"><i class="fad fa-home"></i> Home</a>
+            <a href="/databases"><i class="fad fa-database"></i> Databases</a>
+        </div>
+
+        <br>
+
+        <h3>Information</h3>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Partitioned?</th>
+                <th>DuploTables?</th>
+                <th>Only Admins?</th>
+                <th>Automatic Backups?</th>
+            </tr>
+
+            <tr>
+                <td> <%= database_name %> </td>
+                <td> <%= database_partitioned %> </td>
+                <td> <%= database_duplo %> </td>
+                <td> <%= database_onlyadmins %> </td>
+                <td> <%= database_autobackups %> </td>
+            </tr>
+        </table>
+    </body>
+</html>
