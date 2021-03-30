@@ -63,6 +63,20 @@ export default class Client {
             }
 
             fs.writeFileSync(this.defaultDirname + '/' + dbname + '/' + tablename + '.json', JSON.stringify([]))
+        }
+
+        if (stmt.startsWith('INSERT ROW')){
+            var dbname: any = stmt?.split('[')?.pop()?.split(']')[0]
+            var tablename: any = stmt?.split('<')?.pop()?.split(']')[0]
+            var tablecontents: any = stmt?.split('(')?.pop()?.split(')')[0]
+
+            if (!fs.existsSync(this.defaultDirname)){
+                fs.mkdirSync(this.defaultDirname)
+            }
+
+            if (!fs.existsSync(this.defaultDirname + '/' + dbname)){
+                fs.mkdirSync(this.defaultDirname + '/' + dbname)
+            }
 
             var allContents
 
